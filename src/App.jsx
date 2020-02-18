@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDom from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import Timer from "./View/Timer.jsx";
 import Temperature from "./View/Temperature.jsx";
@@ -14,23 +15,13 @@ class App extends React.Component {
 			temp: ""
 		};
 		this.currentTimeInterval = "";
-		this.cities = ["Delhi", "Mumbai", "Bengaluru", "Kolkata"];
+		this.cities = ["delhi", "mumbai", "bengaluru", "kolkata"];
 
 		this.setCurrentTime = this.setCurrentTime.bind(this);
 	}
 
 	componentDidMount() {
 		this.currentTimeInterval = setInterval(this.setCurrentTime, 1000);
-
-		fetch(
-			"http://api.openweathermap.org/data/2.5/weather?q=New+Delhi&APPID=7644dfa29600d94416addbd37e32eb54&units=metric"
-		)
-			.then(res => res.json())
-			.then(res => {
-				this.setState({
-					temp: res.main.temp
-				});
-			});
 	}
 
 	setCurrentTime() {
@@ -49,8 +40,10 @@ class App extends React.Component {
 		return (
 			<div>
 				<Timer currentTime={this.state.currentTime}></Timer>
-				<Cities cities={this.cities}></Cities>
-				<Temperature temp={this.state.temp}></Temperature>
+				<BrowserRouter>
+					<Cities cities={this.cities}></Cities>
+					<Temperature cities={this.cities}></Temperature>
+				</BrowserRouter>
 			</div>
 		);
 	}
