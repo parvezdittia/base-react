@@ -14,7 +14,7 @@ class App extends React.Component {
 			temp: ""
 		};
 		this.currentTimeInterval = "";
-		this.cities = ["New Delhi", "Mumbai", "Bengaluru", "Kolkata"];
+		this.cities = ["Delhi", "Mumbai", "Bengaluru", "Kolkata"];
 
 		this.setCurrentTime = this.setCurrentTime.bind(this);
 	}
